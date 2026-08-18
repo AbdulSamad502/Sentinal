@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="630" fill="#1A1815" />
+
+  <!-- hairline rules, echoing the site's structure -->
+  <g stroke="#332D25" stroke-width="1">
+    <line x1="0" y1="104" x2="1200" y2="104" />
+    <line x1="0" y1="526" x2="1200" y2="526" />
+    <line x1="80" y1="0" x2="80" y2="630" />
+  </g>
+
+  <!-- the lens -->
+  <g transform="translate(982, 310)" fill="none" stroke="#A9A192">
+    <circle r="150" stroke-width="1.5" opacity="0.45" />
+    <circle r="168" stroke-width="1" opacity="0.2" />
+    <path d="M0 -168v28M168 0h-28M0 168v-28M-168 0h28" stroke-width="1.5" opacity="0.4" />
+  </g>
+
+  <!-- file rows crossing the lens, each tagged with its verdict -->
+  <g font-family="IBM Plex Mono, Consolas, monospace" font-size="17">
+    <g transform="translate(786, 232)">
+      <rect width="392" height="44" rx="5" fill="#242019" stroke="#332D25" />
+      <rect x="-7" width="5" height="44" rx="2.5" fill="#6BC49A" />
+      <text x="18" y="28" fill="#F0EDE6">src/lib/releases.ts</text>
+      <text x="374" y="28" fill="#6BC49A" text-anchor="end">SAFE</text>
+    </g>
+    <g transform="translate(786, 288)">
+      <rect width="392" height="44" rx="5" fill="#242019" stroke="#332D25" />
+      <rect x="-7" width="5" height="44" rx="2.5" fill="#F07F72" />
+      <text x="18" y="28" fill="#F0EDE6">.env.local</text>
+      <text x="374" y="28" fill="#F07F72" text-anchor="end">STOP</text>
+    </g>
+    <g transform="translate(786, 344)">
+      <rect width="392" height="44" rx="5" fill="#242019" stroke="#332D25" />
+      <rect x="-7" width="5" height="44" rx="2.5" fill="#E0A93C" />
+      <text x="18" y="28" fill="#F0EDE6">package-lock.json</text>
+      <text x="374" y="28" fill="#E0A93C" text-anchor="end">REVIEW</text>
+    </g>
+  </g>
+
+  <!-- mark -->
+  <g transform="translate(136, 62)">
+    <g fill="none" stroke="#F0EDE6" stroke-width="2.2">
+      <circle r="13" />
+      <path d="M0 -22v6.5M22 0h-6.5M0 22v-6.5M-22 0h6.5" />
+    </g>
+    <circle r="4.6" fill="#B98FC9" />
+  </g>
+  <text x="176" y="70" fill="#F0EDE6" font-size="26" font-weight="600" letter-spacing="-0.2">Sentinel</text>
+
+  <!-- headline -->
+  <text x="136" y="272" fill="#F0EDE6" font-size="54" font-weight="600" letter-spacing="-1.4">A supervisor for the</text>
+  <text x="136" y="334" fill="#F0EDE6" font-size="54" font-weight="600" letter-spacing="-1.4">agent writing your code.</text>
+
+  <text x="136" y="396" fill="#A9A192" font-size="23">It does not write code. It reports.</text>
+
+  <!-- footer line -->
+  <text x="136" y="578" fill="#A9A192" font-size="17" font-family="IBM Plex Mono, Consolas, monospace">SAFE · REVIEW · CONDITIONAL · STOP</text>
+  <text x="1120" y="578" fill="#A9A192" font-size="17" font-family="IBM Plex Mono, Consolas, monospace" text-anchor="end">Apache 2.0</text>
+</svg>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sentinel — a supervisor for the agent writing your code</title>
+    <meta
+      name="description"
+      content="Sentinel watches an AI coding agent while it works and answers one question continuously: is what this agent is doing safe, correct, and shippable? It does not write code. It reports."
+    />
+
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Sentinel — a supervisor for the agent writing your code"
+    />
+    <meta
+      property="og:description"
+      content="An independent, skeptical observer for AI coding agents. Four verdicts: SAFE, REVIEW, CONDITIONAL, STOP. The LLM never decides the verdict."
+    />
+    <meta property="og:image" content="./og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Sentinel — a supervisor for the agent writing your code"
+    />
+    <meta
+      name="twitter:description"
+      content="An independent, skeptical observer for AI coding agents. Four verdicts: SAFE, REVIEW, CONDITIONAL, STOP. The LLM never decides the verdict."
+    />
+    <meta name="twitter:image" content="./og.png" />
+
+    <meta name="theme-color" content="#F2F1ED" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1A1815" media="(prefers-color-scheme: dark)" />
+
+    <script>
+      // Apply the stored theme before first paint so the page never flashes the
+      // wrong one. Kept inline and tiny on purpose.
+      (function () {
+        try {
+          var stored = localStorage.getItem("sentinel:theme");
+          if (stored === "light" || stored === "dark") {
+            document.documentElement.setAttribute("data-theme", stored);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

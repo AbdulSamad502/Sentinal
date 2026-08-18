@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Sentinel design tokens
+
+   The governing rule: colour means status. The four verdict colours are the
+   only saturated colours on this site. The violet accent is for interactive
+   affordances -- links, focus rings, controls -- and never for status.
+
+   No blue, and no slate or steel greys: they read as blue-adjacent, and blue is
+   the default every generated dev-tool site reaches for. The neutrals here are
+   warm graphite with a faint ochre bias so they read as chosen.
+
+   These values match the product's real dashboard. Keep them in sync.
+--------------------------------------------------------------------------- */
+
+:root {
+  --ground: #f2f1ed;
+  --surface: #ffffff;
+  --surface-sunk: #eceae4;
+  --ink: #191713;
+  --ink-soft: #5c564c;
+  --rule: #dfdbd2;
+
+  --safe: #2e7d5b;
+  --review: #a6720c;
+  --conditional: #b4571c;
+  --stop: #a83228;
+  --accent: #6e4a7e;
+
+  /* Tints for badge and card backgrounds. */
+  --safe-wash: #e3efe9;
+  --review-wash: #f6ecd8;
+  --conditional-wash: #f8e8dc;
+  --stop-wash: #f7e3e0;
+  --accent-wash: #ede6f1;
+
+  /* Text-only variants of the verdict colours. The swatch colours above are
+     the fixed product palette and are used for icons, dots and washes, which
+     only need to clear WCAG's 3:1 non-text threshold -- they do, comfortably.
+     But small verdict-coloured TEXT (badges, the ladder) needs 4.5:1, and in
+     light mode three of the four swatch colours fall short of that against
+     white cards and their own wash background (REVIEW is as low as 3.56:1).
+     These are the same hues, darkened just enough to clear 4.5:1 against
+     ground, surface and wash alike -- not a palette change, a text-safe tint
+     of it. Dark mode already clears AA with the swatch colours as-is. */
+  --safe-text: #2b7656;
+  --review-text: #8b600a;
+  --conditional-text: #a6501a;
+  --stop-text: #a83228;
+
+  --shadow-card: 0 1px 2px rgb(25 23 19 / 0.05), 0 8px 24px -12px rgb(25 23 19 / 0.12);
+  color-scheme: light;
+}
+
+/* Default to the visitor's system preference ... */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #1a1815;
+    --surface: #242019;
+    --surface-sunk: #14120f;
+    --ink: #f0ede6;
+    --ink-soft: #a9a192;
+    --rule: #332d25;
+
+    --safe: #6bc49a;
+    --review: #e0a93c;
+    --conditional: #ee9152;
+    --stop: #f07f72;
+    --accent: #b98fc9;
+
+    --safe-wash: #1d2f26;
+    --review-wash: #302512;
+    --conditional-wash: #331f14;
+    --stop-wash: #341d1a;
+    --accent-wash: #2a2130;
+
+    /* Dark mode already clears AA at the swatch colours -- no darkening
+       needed, so the text token is just an alias. */
+    --safe-text: var(--safe);
+    --review-text: var(--review);
+    --conditional-text: var(--conditional);
+    --stop-text: var(--stop);
+
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+/* ... but an explicit choice always wins, in both directions. */
+:root[data-theme="dark"] {
+  --ground: #1a1815;
+  --surface: #242019;
+  --surface-sunk: #14120f;
+  --ink: #f0ede6;
+  --ink-soft: #a9a192;
+  --rule: #332d25;
+
+  --safe: #6bc49a;
+  --review: #e0a93c;
+  --conditional: #ee9152;
+  --stop: #f07f72;
+  --accent: #b98fc9;
+
+  --safe-wash: #1d2f26;
+  --review-wash: #302512;
+  --conditional-wash: #331f14;
+  --stop-wash: #341d1a;
+  --accent-wash: #2a2130;
+
+  --safe-text: var(--safe);
+  --review-text: var(--review);
+  --conditional-text: var(--conditional);
+  --stop-text: var(--stop);
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-sunk: var(--surface-sunk);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+
+  --color-safe: var(--safe);
+  --color-review: var(--review);
+  --color-conditional: var(--conditional);
+  --color-stop: var(--stop);
+  --color-accent: var(--accent);
+
+  --color-safe-wash: var(--safe-wash);
+  --color-review-wash: var(--review-wash);
+  --color-conditional-wash: var(--conditional-wash);
+  --color-stop-wash: var(--stop-wash);
+  --color-accent-wash: var(--accent-wash);
+
+  --color-safe-text: var(--safe-text);
+  --color-review-text: var(--review-text);
+  --color-conditional-text: var(--conditional-text);
+  --color-stop-text: var(--stop-text);
+
+  --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+html {
+  /* The nav is sticky. Without this, anchor jumps and keyboard focus land
+     underneath it -- WCAG 2.2 "focus not obscured". */
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background-color: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* A single visible focus treatment, everywhere, in the violet accent.
+   2px solid with an offset -- thin low-contrast outlines do not qualify. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ground);
+}
+
+/* Wide content scrolls inside its own container; the body never scrolls
+   horizontally. */
+body {
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
